@@ -8,7 +8,7 @@ import (
 // encodeTextToken writes to w the properly escaped XML equivalent of the
 // plain text data s.
 //
-// This works like EscapeText, but does not escape whitespace.
+// This works like EscapeText, but does not escape whitespace and ignores BOM.
 func encodeTextToken(w io.Writer, s []byte) error {
 	var esc []byte
 	last := 0
@@ -32,6 +32,9 @@ func encodeTextToken(w io.Writer, s []byte) error {
 		// 	esc = esc_nl
 		// case '\r':
 		// 	esc = esc_cr
+		case '\ufeff': // BOM
+			last = i
+			continue // ignore
 		default:
 			if !isInCharacterRange(r) || (r == 0xFFFD && width == 1) {
 				esc = esc_fffd
