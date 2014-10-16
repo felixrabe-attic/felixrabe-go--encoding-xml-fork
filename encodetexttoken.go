@@ -26,12 +26,12 @@ func encodeTextToken(w io.Writer, s []byte) error {
 			esc = esc_lt
 		case '>':
 			esc = esc_gt
-		case '\t':
-			esc = esc_tab
-		case '\n':
-			esc = esc_nl
-		case '\r':
-			esc = esc_cr
+		// case '\t':
+		// 	esc = esc_tab
+		// case '\n':
+		// 	esc = esc_nl
+		// case '\r':
+		// 	esc = esc_cr
 		default:
 			if !isInCharacterRange(r) || (r == 0xFFFD && width == 1) {
 				esc = esc_fffd
