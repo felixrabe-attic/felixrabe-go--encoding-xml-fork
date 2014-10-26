@@ -4,6 +4,10 @@
 
 // Package xml implements a simple XML 1.0 parser that
 // understands XML name spaces.
+//
+// This is mostly a drop-in replacement for 'encoding/xml' with minor changes:
+//     - White space will encode back to white space.
+//     - BOM is ignored.
 package xml
 
 // References:
